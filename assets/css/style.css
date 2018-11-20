@@ -1,0 +1,18 @@
+
+body{
+    width:50%;
+    margin: 10px;
+
+}
+.jumbotron{
+    background:aliceblue;
+    padding: 10px;
+    text-align: center;
+}
+.nav{
+    margin-bottom: 1rem;
+}
+#alert, #ops{
+    font-weight: bolder;
+    font-size: 20px;
+}
