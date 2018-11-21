@@ -74,8 +74,7 @@ function makeAsound(elemId) {
 }
 //hangman images
 function hangemeImages(totalLives) {
-
-    makeAsound("myAudio");
+    
     document.getElementById("totalLives").textContent = "Total Lives : " + lives;
     document.getElementById("hangManImg").innerHTML = ' <img src="./assets/images/hangman_' + totalLives + '.gif">'
     document.getElementById("ops").textContent = 'Ooops!!!';
@@ -102,61 +101,55 @@ function clearAll() {
 // when a keyup
 document.onkeyup = function (event) {
 
-    if (flag) { // if category selected       
-
+    if (flag && (event.which >= 65 && event.which <= 90)) { // albhabets only
         var userGuess = event.key;
-        if (event.which < 65 || event.which > 90) //65=a, 90=z
+        document.getElementById("alert").innerHTML = "";
+        userGuess = userGuess.toUpperCase();
 
-            document.getElementById("alert").innerHTML = '<div class="alert alert-primary" role="alert">Choose letters A - Z</div>';
-        
-        else {
-            userGuess = userGuess.toUpperCase();
+        if ((lives >= 1) && (!winner)) {
 
-            if ((lives >= 1) && (!winner)) {
+            if (guessedLetters.indexOf(userGuess) === -1) { // if not already guessed
+                guessedLettersText = document.getElementById("guessed");
+                guessedLetters.push(userGuess);
+                guessedLettersText.textContent = "You Guessed So Far :" + guessedLetters;
 
-                if (guessedLetters.indexOf(userGuess) === -1) { // if not already guessed
-                    guessedLettersText = document.getElementById("guessed");
-                    guessedLetters.push(userGuess);
-                    guessedLettersText.textContent = "You Guessed So Far :" + guessedLetters;
+                if (word.indexOf(userGuess) >= 0) { //if the letter present in the letter
 
-                    if (word.indexOf(userGuess) >= 0) { //if the letter present in the letter
+                    for (var i = 0; i < word.length; i++) { //search on each location
 
-                        for (var i = 0; i < word.length; i++) { //search on each location
+                        if ((word.charAt(i) === userGuess)) {  // finding the position of the letter
 
-                            if ((word.charAt(i) === userGuess)) {  // finding the position of the letter
-
-                                counter++;
-                                document.getElementById("letter_" + i).textContent = userGuess; // display the letter
-                                document.getElementById("ops").textContent = "";
-                            }
-                            if ((counter === word.length) && (lives >= 0)) { //winner
-                                document.getElementById("alert").innerHTML = '<div class="alert alert-success" role="alert">WINNER!!!</div>';
-                                winner = true;
-                                makeAsound("myAudio1");
-
-
-                            }
+                            counter++;
+                            document.getElementById("letter_" + i).textContent = userGuess; // display the letter
+                            document.getElementById("ops").textContent = "";
                         }
-                    }
-                    else { //if letter not present
-                        lives = lives - 1;
-                        hangemeImages(lives); //hanging images part by part 
-
-                        if ((counter < word.length) && (lives === 0)) { //looser
-                            document.getElementById("alert").innerHTML = '<div class="alert alert-danger" role="alert">LOOSER!!!!!</div>';
-                            looser = true;
-
+                        if ((counter === word.length) && (lives >= 0)) { //winner
+                            document.getElementById("alert").innerHTML = '<div class="alert alert-success" role="alert">WINNER!!!</div>';
+                            winner = true;
+                            makeAsound("myAudio1");
                         }
                     }
                 }
-                else
-                    alert("'" + userGuess + "' You already guessed this letter!!!");
+                else { //if letter not present
+                    
+                    makeAsound("myAudio");
+                    lives = lives - 1;
+                    hangemeImages(lives); //hanging images part by part 
+
+                    if ((counter < word.length) && (lives === 0)) { //looser
+                        document.getElementById("alert").innerHTML = '<div class="alert alert-danger" role="alert">LOOSER!!!!!</div>';
+                        looser = true;
+
+                    }
+                }
             }
+            else
+                alert("'" + userGuess + "' You already guessed this letter!!!");
         }
     }
-    else { // if no selection of category
+    else if (!flag) { // if no selection of category
         clearAll();
         document.getElementById("alert").innerHTML = '<div class="alert alert-primary" role="alert">Select a Category and Play!!!!</div>';
-    }
+    } else return false;
 
 }
