@@ -38,7 +38,7 @@ function createCategoryArray(Cname) {
     var list = [];
     if (Cname === 1) return list = ['DEER', 'HIPPOPOTAMUS', 'GIRAFFE', 'SQUIRREL', 'GOAT', 'SNAKE', 'WHALE', 'BEAR', 'DOG', 'TIGER', 'ELEPHANT', 'LION', 'CAMEL', 'MONKEY', 'HORSE', 'ANT', 'RAT', 'RABBIT', 'COW', 'PIG', 'ZEBRA'];
     else if (Cname === 2) return list = ['MALAYSIA', 'SINGAPORE', 'CANADA', 'URUGUAY', 'GHANA', 'GERMANY', 'CROATIA', 'MEXICO', 'CHILI', 'AMERICA', 'CHINA', 'INDIA', 'AUSTRALIA', 'BRAZIL', 'JAPAN'];
-    else return list = ['JEASUS', 'LIGHTS', 'CHRISTMASTREE', 'CRIB', 'STAR', 'SANTACLAUS', 'RAINDEER', 'ELF'];
+    else return list = ['JESUS', 'LIGHTS', 'CHRISTMASTREE', 'CRIB', 'STAR', 'SANTACLAUS', 'RAINDEER', 'ELF'];
 }
 
 //generate the word
