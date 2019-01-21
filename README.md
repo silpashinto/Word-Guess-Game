@@ -12,3 +12,5 @@ Blank spaces are displayed on the screen equal to the length of the word chosen 
 
 A letter can be guessed only once and for each wrong guess, the chances are decreased by 1 and hangman image is drawn on the canvas part by part till all the 8 chances are used up.
 
+https://silpashinto.github.io/Word-Guess-Game/
+
